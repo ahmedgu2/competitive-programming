@@ -28,3 +28,22 @@ public:
         return ans;
     }
 };
+
+// O(N) Solution
+class Solution {
+public:
+    
+    int last_pos[257];
+    
+    int lengthOfLongestSubstring(string s) {
+        int start = 0;
+        int n = s.length();
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            start = max(last_pos[s[i]], start);
+            last_pos[s[i]] = i+1;
+            ans = max(ans, i - start + 1);
+        }
+        return ans;
+    }
+};
