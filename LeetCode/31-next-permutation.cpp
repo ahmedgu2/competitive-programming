@@ -23,7 +23,7 @@ public:
         2-Find the largest index l > k such that nums[k] < nums[l].
         3-Swap nums[k] and nums[l].
         4-Reverse the sub-array nums[k + 1:].  
-        
+
         */
         
         int n = nums.size();
@@ -46,6 +46,15 @@ public:
             if(nums[low] < nums[i])
                 high = i;
         }
+
+        /* We can use binary search to get find the largest index l > k such that nums[k] < nums[l] since
+        we know that the sequence [k+1:l] is sorted. We just need to search for the upper bound
+        of nums[low] in that sequence (the smallest number bigger than nums[low]).
+        int high = low;
+        auto it = lower_bound(nums.begin() + low + 1, nums.end(), nums[low], greater<int>());
+        high = it - nums.begin() - 1;
+        */
+
         swap(nums[low], nums[high]);
         reverse(nums.begin() + low + 1, nums.end());
     }
